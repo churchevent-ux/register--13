@@ -89,7 +89,7 @@ const Preview = () => {
     };
 
     initializeParticipants();
-  }, [state]);
+  }, [state, mapParticipantData]);
 
   /** Handlers **/
   const handleChange = (index, field, value) => {
@@ -219,7 +219,7 @@ const Preview = () => {
               <label>Secondary Contact</label>
               <input
                 style={styles.input}
-                value={p.secondaryContactNumber}
+                value={p.secondaryContactNumber || ""}
                 onChange={(e) => handleChange(index, "secondaryContactNumber", e.target.value)}
               />
               <small>Relationship: {p.secondaryContactRelationship || "-"}</small>

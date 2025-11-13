@@ -1,19 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  limit,
-} from "firebase/firestore";
-import { db } from "../firebase";
-
-// Logos
 import Logo from "../images/church logo2.png";
-import Logo2 from "../images/logo.jpg";
-import Logo3 from "../images/logo2.png";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -210,31 +197,7 @@ const handleSubmit = (e) => {
     medicalNotes: formData.medicalNotes,
   };
 
-  // Sibling participants
-  const siblingParticipants =
-    formData.hasSibling === "yes"
-      ? formData.siblings.map((s) => ({
-          participantName: s.name,
-          age: s.age,
-          category: s.age >= 13 ? "Teen" : "Kids",
-          categoryColor: s.age >= 13 ? "blue" : "red",
-          fatherName: formData.fatherName,
-          motherName: formData.motherName,
-          contactFatherMobile: formData.contactFatherMobile,
-          contactMotherMobile: formData.contactMotherMobile,
-          primaryContactNumber: formData.primaryContactNumber,
-          primaryContactRelation: formData.primaryContactRelation,
-          secondaryContactNumber: formData.secondaryContactNumber || "",
-          secondaryContactRelationship: formData.secondaryContactRelationship || "",
-          email: formData.email,
-          residence: formData.residence,
-          parentAgreement: formData.parentAgreement,
-          parentSignature: formData.parentSignature,
-          medicalConditions: formData.medicalConditions,
-          otherCondition: formData.otherCondition,
-          medicalNotes: formData.medicalNotes,
-        }))
-      : [];
+  // Sibling participants (removed unused variable siblingParticipants)
 
 const allParticipants = [
   mainParticipant,

@@ -15,6 +15,27 @@ const IDCard = () => {
   const cardRef = useRef();
   const barcodeRefs = useRef({});
 
+
+  // Helper: calculate age from DOB
+  const calculateAge = (dob) => {
+    if (!dob) return null;
+    const birthDate = new Date(dob);
+    if (isNaN(birthDate.getTime())) return null;
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
+    return age;
+  };
+
+  // Helper: get category code based on age or dob
+  const getCategoryCode = (age, dob) => {
+    if (!age && dob) age = calculateAge(dob);
+    if (age >= 8 && age <= 12) return "DGK";
+    if (age >= 13 && age <= 18) return "DGT";
+    return "N/A";
+  };
+
   // Utility: capitalize names
   const capitalizeName = (name) =>
     name
@@ -35,7 +56,7 @@ const IDCard = () => {
     }));
 
     setParticipants(allParticipants);
-  }, [state, navigate]);
+  }, [state, navigate, getCategoryCode]);
 
   // Generate barcode for each participant
   useEffect(() => {
@@ -52,25 +73,6 @@ const IDCard = () => {
     });
   }, [participants]);
 
-  // Helper: get category code based on age or dob
-  const getCategoryCode = (age, dob) => {
-    if (!age && dob) age = calculateAge(dob);
-    if (age >= 8 && age <= 12) return "DGK";
-    if (age >= 13 && age <= 18) return "DGT";
-    return "N/A";
-  };
-
-  // Helper: calculate age from DOB
-  const calculateAge = (dob) => {
-    if (!dob) return null;
-    const birthDate = new Date(dob);
-    if (isNaN(birthDate.getTime())) return null;
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
-    return age;
-  };
 
   // Download ID card as PNG
   const handleDownload = async () => {
@@ -170,22 +172,16 @@ const IDCard = () => {
         </p>
         <h3 style={styles.scheduleTitle}>Lanyard Distribution at Church Premises</h3>
         <div style={styles.scheduleList}>
+      
           <div style={{ marginBottom: "1em" }}>
             <span style={{ color: "#6c3483", fontWeight: "bold" }}>First Batch</span>
-            <ul style={{ margin: "0.5em 0 0 1em" }}>
-              <li>Saturday, November 15, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
-              <li>Sunday, November 16, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
-            </ul>
-          </div>
-          <div style={{ marginBottom: "1em" }}>
-            <span style={{ color: "#6c3483", fontWeight: "bold" }}>Second Batch</span>
             <ul style={{ margin: "0.5em 0 0 1em" }}>
               <li>Saturday, November 22, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
               <li>Sunday, November 23, 2025: 9:30am–1:30pm</li>
             </ul>
           </div>
           <div style={{ marginBottom: "1em" }}>
-            <span style={{ color: "#6c3483", fontWeight: "bold" }}>Third Batch</span>
+            <span style={{ color: "#6c3483", fontWeight: "bold" }}>Second Batch</span>
             <ul style={{ margin: "0.5em 0 0 1em" }}>
               <li>Saturday, December 13, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
               <li>Sunday, December 14, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>

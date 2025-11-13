@@ -65,15 +65,17 @@ const BreakPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Filter data for selected date
-  let breaksForDate = breakData[selectedDate] || [];
-  breaksForDate = breaksForDate.filter(
-    s => s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-         s.id.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  // Sort: ongoing breaks on top
-  breaksForDate.sort((a, b) => (!a.breakOut && b.breakOut ? -1 : a.breakOut && !b.breakOut ? 1 : 0));
+  // Filter and sort data for selected date using useMemo
+  const breaksForDate = React.useMemo(() => {
+    let arr = breakData[selectedDate] || [];
+    arr = arr.filter(
+      s => s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           s.id.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    // Sort: ongoing breaks on top
+    arr.sort((a, b) => (!a.breakOut && b.breakOut ? -1 : a.breakOut && !b.breakOut ? 1 : 0));
+    return arr;
+  }, [breakData, selectedDate, searchQuery]);
 
   // Notifications for >1 hour break
   useEffect(() => {
