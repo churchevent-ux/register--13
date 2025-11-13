@@ -13,7 +13,7 @@ const Preview = () => {
   const [loading, setLoading] = useState(false);
 
   /** Utility Functions **/
-  const calculateAge = (dob) => {
+  const calculateAge = React.useCallback((dob) => {
     if (!dob) return null;
     const birth = new Date(dob);
     const today = new Date();
@@ -21,14 +21,14 @@ const Preview = () => {
     const monthDiff = today.getMonth() - birth.getMonth();
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) age--;
     return age;
-  };
+  }, []);
 
-  const getCategory = (age) => {
+  const getCategory = React.useCallback((age) => {
     if (age < 8) return { label: "Under 8", code: "UND" };
     if (age <= 12) return { label: "Kids", code: "DGK" };
     if (age <= 20) return { label: "Teen", code: "DGT" };
     return { label: "Over 20", code: "OVR" };
-  };
+  }, []);
 
   const getCardBackground = (categoryLabel) => {
     switch (categoryLabel) {

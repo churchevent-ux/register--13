@@ -17,7 +17,7 @@ const IDCard = () => {
 
 
   // Helper: calculate age from DOB
-  const calculateAge = (dob) => {
+  const calculateAge = React.useCallback((dob) => {
     if (!dob) return null;
     const birthDate = new Date(dob);
     if (isNaN(birthDate.getTime())) return null;
@@ -26,7 +26,7 @@ const IDCard = () => {
     const monthDiff = today.getMonth() - birthDate.getMonth();
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
     return age;
-  };
+  }, []);
 
   // Helper: get category code based on age or dob
   const getCategoryCode = React.useCallback((age, dob) => {
