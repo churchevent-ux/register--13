@@ -7,6 +7,9 @@ import {
   query,
   orderBy,
   limit,
+  setDoc,
+  doc,
+  where,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Logo2 from "../images/church logo2.png";
@@ -90,21 +93,38 @@ const VolunteerRegister = () => {
     e.preventDefault();
     try {
       const volRef = collection(db, "volunteers");
-      const q = query(volRef, orderBy("createdAt", "desc"), limit(1));
+      
+      // Query for the last volunteer ID with DGV prefix
+      const q = query(
+        volRef,
+        where("volunteerId", ">=", "DGV-000"),
+        where("volunteerId", "<", "DGV-999999"),
+        orderBy("volunteerId", "desc"),
+        limit(1)
+      );
       const snap = await getDocs(q);
 
-      let lastIndex = 0;
+      let lastNumber = 0;
       snap.forEach((doc) => {
-        const idNum = parseInt(
-          doc.data()?.volunteerId?.replace("Volunteer ", "") || "0"
-        );
-        if (!isNaN(idNum)) lastIndex = idNum;
+        const lastId = doc.data()?.volunteerId;
+        if (lastId) {
+          const numberPart = lastId.split("-")[1];
+          lastNumber = parseInt(numberPart) || 0;
+        }
       });
 
-      const newId = `Volunteer ${lastIndex + 1}`;
-      const dataToSave = { ...formData, volunteerId: newId, createdAt: new Date() };
+      // Generate new unique ID with DGV prefix (DGV = Don Bosco Guwahati Volunteer)
+      const newNumber = lastNumber + 1;
+      const volunteerId = `DGV-${String(newNumber).padStart(3, "0")}`;
+      
+      const dataToSave = { 
+        ...formData, 
+        volunteerId: volunteerId, 
+        createdAt: new Date() 
+      };
 
-      await addDoc(volRef, dataToSave);
+      // Use the unique ID as the document ID
+      await setDoc(doc(volRef, volunteerId), dataToSave);
       navigate("/volunteer-id", { state: { formData: dataToSave } });
     } catch (err) {
       console.error("Error adding volunteer:", err);

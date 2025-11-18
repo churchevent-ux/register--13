@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, getDocs, query, where, orderBy, limit, setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import Logo from "../images/church logo2.png";
 
@@ -149,6 +149,46 @@ const handleRemoveSibling = (index) => {
 };
 
 
+// Helper function to generate unique ID based on category
+const generateUniqueId = async (category) => {
+  let prefix = "";
+  
+  // Determine prefix based on category
+  if (category === "Kids") {
+    prefix = "DGK";
+  } else if (category === "Teen") {
+    prefix = "DGT";
+  } else {
+    prefix = "DGX"; // Default for any other category
+  }
+
+  // Query for the last ID with this prefix
+  const usersRef = collection(db, "users");
+  const q = query(
+    usersRef,
+    where("uniqueId", ">=", `${prefix}-000`),
+    where("uniqueId", "<", `${prefix}-999999`),
+    orderBy("uniqueId", "desc"),
+    limit(1)
+  );
+
+  const snapshot = await getDocs(q);
+  let lastNumber = 0;
+
+  snapshot.forEach((doc) => {
+    const lastId = doc.data().uniqueId;
+    if (lastId) {
+      const numberPart = lastId.split("-")[1];
+      lastNumber = parseInt(numberPart) || 0;
+    }
+  });
+
+  // Generate new ID with incremented number (padded to 3 digits)
+  const newNumber = lastNumber + 1;
+  const newId = `${prefix}-${String(newNumber).padStart(3, "0")}`;
+  return newId;
+};
+
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -227,10 +267,22 @@ const handleSubmit = async (e) => {
 
   try {
     const usersRef = collection(db, "users");
-    // Save all participants (main + siblings)
+    
+    // Save all participants (main + siblings) with unique IDs
     for (const participant of allParticipants) {
-      await addDoc(usersRef, participant);
+      // Generate unique ID based on category
+      const uniqueId = await generateUniqueId(participant.category);
+      
+      // Add uniqueId to participant data
+      const participantWithId = {
+        ...participant,
+        uniqueId: uniqueId,
+      };
+      
+      // Use setDoc with the unique ID as document ID
+      await setDoc(doc(usersRef, uniqueId), participantWithId);
     }
+    
     setLoading(false);
     navigate("/preview", { state: { participants: allParticipants } });
   } catch (err) {
