@@ -1160,41 +1160,23 @@ const Header = () => (
   </p>
 <div
   style={{
-    marginTop: 8,
-    fontSize: 12,
+    marginTop: 10,
+    padding: "10px 12px",
+    borderLeft: "4px solid #d9534f",
+    backgroundColor: "#fff5f5",
+    fontSize: 13,
     color: "#b02a37",
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 6,
-    alignItems: "center",
+    lineHeight: 1.6,
   }}
 >
-  <strong>Age Category:</strong>
+  <div style={{ fontWeight: 700, marginBottom: 6 }}>
+    Age Category
+  </div>
 
-  <span
-    style={{
-      background: "#fdecea",
-      border: "1px solid #f5c2c7",
-      padding: "3px 8px",
-      borderRadius: 12,
-      fontWeight: 500,
-    }}
-  >
-    Kids 8–12
-  </span>
-
-  <span
-    style={{
-      background: "#fdecea",
-      border: "1px solid #f5c2c7",
-      padding: "3px 8px",
-      borderRadius: 12,
-      fontWeight: 500,
-    }}
-  >
-    Teens 13–18
-  </span>
+  <div>Kids: <strong>8–12 Years</strong></div>
+  <div>Teens: <strong>13–18 Years</strong></div>
 </div>
+
 
 
 
