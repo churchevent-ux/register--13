@@ -1158,6 +1158,18 @@ const Header = () => (
   >
     (December 28th to 30th) – 3 Days
   </p>
+        <div
+  style={{
+    marginTop: 6,
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#d9534f", // light red
+    lineHeight: 1.4,
+  }}
+>
+  <strong>Age Category:</strong> Kids – 8 to 12 Years / Teens – 13 to 18 Years
+</div>
+
 
   <h3
     style={{
