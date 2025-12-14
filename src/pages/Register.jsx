@@ -1162,18 +1162,18 @@ const Header = () => (
   style={{
     marginTop: 14,
     textAlign: "center",
-    color: "#8b1e1e", // deep red
+    color: "#b02a37", // elegant red
   }}
 >
   <div
     style={{
-      fontSize: 14,
+      fontSize: 15,
       fontWeight: 600,
-      letterSpacing: "0.4px",
       marginBottom: 4,
+      letterSpacing: "0.3px",
     }}
   >
-    AGE CATEGORY
+    Age Category
   </div>
 
   <div
@@ -1183,10 +1183,11 @@ const Header = () => (
     }}
   >
     Kids <strong>8–12 Years</strong>
-    <span style={{ margin: "0 10px", opacity: 0.6 }}>|</span>
+    <span style={{ margin: "0 12px", opacity: 0.6 }}>|</span>
     Teens <strong>13–18 Years</strong>
   </div>
 </div>
+
 
 
 
