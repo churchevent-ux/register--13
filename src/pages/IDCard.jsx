@@ -203,6 +203,22 @@ const IDCard = () => {
             </ul>
          
           </div>
+          <div
+  style={{
+    marginTop: 10,
+    padding: "10px 12px",
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#b02a37",           // dark red text
+    backgroundColor: "#fdecea", // light red background
+    border: "1px solid #f5c2c7",
+    borderRadius: 8,
+    lineHeight: 1.5,
+  }}
+>
+⚠️ Please check your email for updates and details regarding your registration.
+</div>
+
         </div>
       </div>
       </div>
