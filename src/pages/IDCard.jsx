@@ -199,7 +199,7 @@ const IDCard = () => {
           <div style={{ marginBottom: "1em" }}>
             <span style={{ color: "#6c3483", fontWeight: "bold" }}>Final Batch</span>
             <ul style={{ margin: "0.5em 0 0 1em" }}>
-              <li>Saturday, December 27, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
+              <li>Saturday, December 23, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
             </ul>
          
           </div>
