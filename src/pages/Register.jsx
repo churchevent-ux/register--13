@@ -1315,6 +1315,19 @@ const CategoryDisplay = ({ age, category }) => {
       >
         {display}
       </div>
+
+  <div
+    style={{
+      marginTop: 6,
+      fontSize: 12,
+      color: "#666",
+      lineHeight: 1.4,
+    }}
+  >
+    <strong>Age Category:</strong> Kids – 8 to 12 Years / Teens – 13 to 18 Years
+  </div>
+
+      
       {/* Pass eligibility status */}
       <input type="hidden" value={isEligible} data-eligible={isEligible} />
     </div>
