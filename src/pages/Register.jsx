@@ -1158,17 +1158,26 @@ const Header = () => (
   >
     (December 28th to 30th) – 3 Days
   </p>
-        <div
+<div
   style={{
     marginTop: 6,
-    fontSize: 13,
-    fontWeight: 600,
-   color: "#666",// light red
+    fontSize: 12,
+    color: "#d9534f", // red
     lineHeight: 1.4,
+    display: "grid",
+    gridTemplateColumns: "120px 1fr",
+    gap: 6,
+    alignItems: "start",
   }}
 >
-  <strong>Age Category:</strong> Kids – 8 to 12 Years / Teens – 13 to 18 Years
+  <strong>Age Category:</strong>
+
+  <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+    <span>Kids – 8 to 12 Years</span>
+    <span>Teens – 13 to 18 Years</span>
+  </div>
 </div>
+
 
 
   <h3
