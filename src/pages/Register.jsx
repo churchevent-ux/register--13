@@ -1189,6 +1189,16 @@ const Header = () => (
 </div>
 
 
+<h3
+  style={{
+    fontSize: "17px",
+    color: "#e60000",
+    fontWeight: "800",
+    margin: "15px 0 5px",
+  }}
+>
+  ⚠️ Lanyard Collection – Last Date: December 23, 2025
+</h3>
 
 
 
