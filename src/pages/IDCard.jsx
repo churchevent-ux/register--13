@@ -181,28 +181,26 @@ const IDCard = () => {
         </p>
         <h3 style={styles.scheduleTitle}>Lanyard Distribution at Church Premises</h3>
         <div style={styles.scheduleList}>
-      
-          <div style={{ marginBottom: "1em" }}>
-            <span style={{ color: "#6c3483", fontWeight: "bold" }}>First Batch</span>
-            <ul style={{ margin: "0.5em 0 0 1em" }}>
-              <li>Saturday, November 22, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
-              <li>Sunday, November 23, 2025: 9:30am–1:30pm</li>
-            </ul>
-          </div>
-          <div style={{ marginBottom: "1em" }}>
-            <span style={{ color: "#6c3483", fontWeight: "bold" }}>Second Batch</span>
-            <ul style={{ margin: "0.5em 0 0 1em" }}>
-              <li>Saturday, December 13, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
-              <li>Sunday, December 14, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
-            </ul>
-          </div>
-          <div style={{ marginBottom: "1em" }}>
-            <span style={{ color: "#6c3483", fontWeight: "bold" }}>Final Batch</span>
-            <ul style={{ margin: "0.5em 0 0 1em" }}>
-              <li>Saturday, December 23, 2025: 9:30am–1:30pm & 4:00pm–7:30pm</li>
-            </ul>
-         
-          </div>
+       <div style={{ marginBottom: "1em" }}>
+  <span style={{ color: "#6c3483", fontWeight: "bold" }}>Final Batch</span>
+  <ul style={{ margin: "0.5em 0 0 1em" }}>
+    <li>
+      Saturday, December 23, 2025: 9:30 AM – 1:30 PM & 4:00 PM – 7:30 PM
+    </li>
+    <li
+      style={{
+        color: "#ff0000",
+        fontWeight: "800",
+        backgroundColor: "#ffe6e6",
+        padding: "6px 8px",
+        borderRadius: "4px",
+        display: "inline-block"
+      }}
+    >
+     Last date to collect the lanyard: December 23, 2025
+    </li>
+  </ul>
+</div>
           <div
   style={{
     marginTop: 10,
